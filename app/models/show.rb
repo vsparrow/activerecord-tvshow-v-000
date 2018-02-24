@@ -26,8 +26,10 @@ class Show < ActiveRecord::Base
   def self.least_popular_show
     #returns the tv show with the lowest rating (FAILED - 4)
     lowest = self.lowest_rating
-    show = Show.find_by rating: lowest
-    show
+    # show = Show.find_by rating: lowest
+    # show
+    show = Show.where("rating = ?",lowest)
+    show[0]
   end
 
   def self.ratings_sum
@@ -40,9 +42,10 @@ class Show < ActiveRecord::Base
 
   def self.popular_shows
     #returns an array of all of the shows with a rating above 5 (FAILED - 6)
-    show_array=[]
-    Show.find_each {|s| show_array << s if s.rating > 5}
-    show_array
+    # show_array=[]
+    # Show.find_each {|s| show_array << s if s.rating > 5}
+    # show_array
+    Show.where("rating > ?",5)
   end
 
   def self.shows_by_alphabetical_order
